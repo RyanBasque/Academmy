@@ -8,7 +8,18 @@ import BannerComponent from './components/BannerComponent/BannerComponent';
 import ItemComponent from './components/ItemComponent/ItemComponent';
 
 const App = () => {
-  const [trainings, setTrainings] = useState([{ value: 'A', key: 'ahsdiha' }, { value: 'B', key: 'ahdiha' }, { value: 'C', key: 'hdiha' }]);
+  const [trainings, setTrainings] = useState([
+    { value: 'A', key: 'ahsdiha' },
+    { value: 'B', key: 'ahdiha' },
+    { value: 'C', key: 'hdiha' }
+  ]);
+
+  const [muscle, setMuscle] = useState([
+    [1, { value: 'Breastplate', key: '1', refresh: false }, { value: 'Triceps', key: '2' }],
+    [2, { value: 'Dorsal', key: '3' }, { value: 'Biceps', key: '4' }, { value: 'Cardiovascular', key: '5' }],
+    [3, { value: 'Legs', key: '6' }, { value: 'Deltoids', key: '7' }, { value: 'Calfs', key: '8' }],
+  ]);
+
   return (
     <View style={styles.container}>
       <HeaderComponent />
@@ -17,8 +28,8 @@ const App = () => {
         <FlatList
           horizontal
           data={trainings}
-          renderItem={({ item }) => {
-            return <ItemComponent text={item.value} />
+          renderItem={({ item, index }) => {
+            return <ItemComponent text={item.value} list={muscle[index]} />
           }}
         />
       </View>

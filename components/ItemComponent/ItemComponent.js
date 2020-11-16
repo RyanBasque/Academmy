@@ -1,12 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Button, TouchableOpacity, FlatList } from 'react-native';
 
 const ItemComponent = (props) => {
+    const [refresh, setRefresh] = useState();
+    let muscleList = [];
+
+    const setList = (list) => {
+        muscleList = list;
+    };
+
+    setList(props.list)
+
+    const translateHandler = () => {
+        if (muscleList[0] == 1) {
+            setRefresh(muscleList);
+            muscleList[1].value = 'Peitorais';
+            muscleList[2].value = 'Tríceps';
+        };
+        if (muscleList[0] == 2) {
+            setRefresh(muscleList);
+            muscleList[1].value = 'Dorsais';
+            muscleList[2].value = 'Bíceps';
+            muscleList[3].value = 'Cardiovascular';
+        }
+        if (muscleList[0] == 3) {
+            setRefresh(muscleList);
+            muscleList[1].value = 'Pernas';
+            muscleList[2].value = 'Deltóides';
+            muscleList[3].value = 'Panturrilhas';
+        }
+    };
+
+    const showExercises = () => {
+        console.log('a')
+    };
+
     return (
-        <View style={styles.item}>
+        <TouchableOpacity style={styles.item} activeOpacity={0.3} onPress={showExercises}>
             <Text style={styles.title}>Training: {props.text}</Text>
-        </View>
+            <View style={styles.list}>
+                <FlatList
+                    extraData={refresh}
+                    keyExtractor={(item) => { item.key }}
+                    data={muscleList}
+                    renderItem={({ item }) => {
+                        if (item.value !== undefined) {
+                            return <Text style={styles.texts}> - {item.value}</Text>
+                        }
+                    }}
+                />
+            </View>
+            <TouchableOpacity style={styles.button} onPress={translateHandler} activeOpacity={0.3}>
+                <Text style={{ color: 'rgb(91, 198, 110)', fontWeight: 'bold' }}>Translate</Text>
+            </TouchableOpacity>
+        </TouchableOpacity>
     );
 };
 
@@ -17,13 +65,29 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgb(230, 230, 230)',
         borderRadius: 10,
         marginRight: 10,
-        padding: 10
+        paddingTop: 10,
+        justifyContent: 'space-between'
     },
     title: {
         color: 'rgb(91, 198, 110)',
         fontSize: 20,
         textAlign: 'center',
         fontWeight: 'bold'
+    },
+    texts: {
+        fontSize: 15
+    },
+    list: {
+        paddingLeft: 10,
+        paddingRight: 10
+    },
+    button: {
+        width: '100%',
+        alignItems: "center",
+        backgroundColor: "#DDDDDD",
+        padding: 13,
+        borderBottomEndRadius: 10,
+        borderBottomStartRadius: 10
     }
 });
 
