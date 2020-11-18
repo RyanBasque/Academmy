@@ -13,18 +13,17 @@ const ItemComponent = (props) => {
     setList(props.list)
 
     const translateHandler = () => {
-        if (muscleList[0] == 1) {
+        if (muscleList[0] == 0) {
             setRefresh(muscleList);
             muscleList[1].value = 'Peitorais';
             muscleList[2].value = 'Tríceps';
         };
-        if (muscleList[0] == 2) {
+        if (muscleList[0] == 1) {
             setRefresh(muscleList);
             muscleList[1].value = 'Dorsais';
             muscleList[2].value = 'Bíceps';
-            muscleList[3].value = 'Cardiovascular';
         }
-        if (muscleList[0] == 3) {
+        if (muscleList[0] == 2) {
             setRefresh(muscleList);
             muscleList[1].value = 'Pernas';
             muscleList[2].value = 'Deltóides';
@@ -32,12 +31,8 @@ const ItemComponent = (props) => {
         }
     };
 
-    const showExercises = () => {
-        console.log('a')
-    };
-
     return (
-        <TouchableOpacity style={styles.item} activeOpacity={0.3} onPress={showExercises}>
+        <TouchableOpacity style={styles.item} activeOpacity={0.3} onPress={props.click}>
             <Text style={styles.title}>Training: {props.text}</Text>
             <View style={styles.list}>
                 <FlatList
