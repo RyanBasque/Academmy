@@ -15,7 +15,7 @@ const BannerComponent = () => {
 
 const styles = StyleSheet.create({
     bannerContainer: {
-        height: 225,
+        height: 235,
         width: '100%',
         backgroundColor: 'rgb(91, 198, 110)',
         alignItems: 'center'

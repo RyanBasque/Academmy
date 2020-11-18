@@ -15,9 +15,19 @@ const App = () => {
   ]);
 
   const [muscle, setMuscle] = useState([
-    [0, { value: 'Breastplate', key: '1' }, { value: 'Triceps', key: '2' }],
-    [1, { value: 'Dorsal', key: '3' }, { value: 'Biceps', key: '4' }],
-    [2, { value: 'Legs', key: '5' }, { value: 'Deltoids', key: '6' }, { value: 'Calfs', key: '7' }],
+    [
+      { value: 'Breastplate', key: '1' },
+      { value: 'Triceps', key: '2' }
+    ],
+    [
+      { value: 'Dorsal', key: '3' },
+      { value: 'Biceps', key: '4' }
+    ],
+    [
+      { value: 'Legs', key: '5' },
+      { value: 'Deltoids', key: '6' },
+      { value: 'Calfs', key: '7' }
+    ],
   ]);
 
   const [showExercises, setShowExercises] = useState(false);
@@ -40,6 +50,7 @@ const App = () => {
           <FlatList
             showsHorizontalScrollIndicator={false}
             horizontal
+            keyExtractor={key => key.key}
             data={trainings}
             renderItem={({ item, index }) => {
               return <ItemComponent text={item.value} list={muscle[index]} click={() => { showExercisesContainer(index) }} />
